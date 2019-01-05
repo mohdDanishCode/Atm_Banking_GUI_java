@@ -1,0 +1,133 @@
+import java.util.Scanner;
+
+public class BankingApplication 
+{
+	public static void main(String args[])
+	{
+		BankAccount obj=new BankAccount("xyz","BA0001");
+		obj.showmenu();
+		
+	}
+
+}
+
+class BankAccount
+{
+	int balance;
+	int previousTransiction;
+	String customerName;
+	String customerId;
+	BankAccount(String cname,String cid)
+	{
+		customerName= cname;
+		customerId=cid;
+	}
+	
+	void deposit(int ammount)
+	{
+		if(ammount !=0) {
+			balance=balance+ammount;
+			previousTransiction=ammount;
+		}
+	}
+	void withdwral(int ammount)
+	{
+		if(ammount !=0)
+		{
+			balance=balance-ammount;
+			previousTransiction=-ammount;
+		}
+	}
+	void getpreviousTransiction()
+	{
+		if(previousTransiction >0)
+		{
+			System.out.println("deposited:" +previousTransiction);
+		}
+		else if(previousTransiction <0)
+		{
+			System.out.println("withdwral:"+Math.abs(previousTransiction));
+		}
+		else
+		{
+			System.out.println("No Transiction occured");
+		}
+	}
+	
+	void showmenu()
+	{
+		char option='\0';
+		Scanner obj=new Scanner(System.in);
+		
+		System.out.println("Welcome"+customerName);
+		System.out.println("Your Id is"+customerId);
+		System.out.println("\r");
+		System.out.println("A, Check Balance");
+		System.out.println("B, Deposit");
+		System.out.println("C, Withdwral");
+		System.out.println("D, Privious transiction ");
+		System.out.println("E, Exit");
+
+		do
+		{
+			System.out.println("---------------------------------------");
+			System.out.println("Enter an option");
+			System.out.println("----------------------------------------");
+option=obj.next().charAt(0);
+            System.out.println("\r");
+            
+            switch(option)
+            {
+            case 'A':
+    			System.out.println("-------------------------");
+    			System.out.println("Balance="+balance);
+    			System.out.println("---------------------------");
+    			System.out.println("\r");
+    			break;
+    			
+            case 'B':
+    			System.out.println("--------------------------");
+    			System.out.println("Enter an ammount to deposit:");
+    			System.out.println("-------------------------------");
+    			int ammount=obj.nextInt();
+    			deposit(ammount);
+    			System.out.println("\r");
+    			break;
+    			
+            case 'C':
+    			System.out.println("----------------------------------");
+    			System.out.println("Enter an ammount to withdwral");
+    			System.out.println("------------------------------------");
+    			int ammount2=obj.nextInt();
+    			withdwral(ammount2);
+    			System.out.println("\r");
+    			break;
+    			
+            case 'D':
+    			System.out.println("------------------------------------");
+    			getpreviousTransiction();
+    			System.out.println("-----------------------------------------");
+    			System.out.println("\r");
+    			break;
+    			
+            case 'E':
+    			System.out.println("-----------------------------------------");
+    			break;
+
+    			
+    		default:
+    			System.out.println("Invalid Option!!.Please enter again");
+    			break;
+    	}
+
+		}while(option!='E');
+		System.out.println("Thankyou for using our services");
+
+		
+	}
+
+	/*private void withdwral(int ammount2) {
+		// TODO Auto-generated method stub
+		
+	}*/
+}

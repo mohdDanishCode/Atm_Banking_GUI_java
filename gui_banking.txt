@@ -1,0 +1,85 @@
+
+import java.applet.*;
+import java.awt.*;
+
+import javax.swing.JOptionPane;
+public class me extends Applet
+{    
+Button A,B,C,D,E;// These are two buttons
+
+int BAL,PREV;
+
+String customerName= "cname";
+String customerId="cid";
+int balance;
+int previousTransiction;
+int val = 10;
+void deposit(int amount)
+{
+	if(amount !=0) {
+		balance=balance+amount;
+		previousTransiction=amount;
+	}
+}
+void withdwral(int amount2)
+{
+	if(amount2 !=0)
+	{
+		balance=balance-amount2;
+		previousTransiction=amount2;
+	}
+}
+public void init ()
+{ 
+A=new Button("Check Balance");
+add(A);
+B=new Button("Deposit");
+add(B);
+C=new Button("Withdwral");
+add(C);
+D=new Button("Privious transiction");
+add(D);
+E=new Button("Exit");
+add(E);
+}
+public boolean action (Event e, Object args)
+{ if(e.target==A) { BAL=balance;
+}
+else if(e.target==B)	{
+String	amount_get=JOptionPane.showInputDialog("Enter the amount" );
+int amount = Integer.parseInt(amount_get);
+deposit(amount);
+}
+else if(e.target==C) {
+	String	amount_get2=JOptionPane.showInputDialog("Enter the amount" );
+	int amount2 = Integer.parseInt(amount_get2);
+	withdwral(amount2);
+}
+else if(e.target==D) {
+	if(previousTransiction >0)
+	{
+		 PREV=previousTransiction;
+	}
+	else if(previousTransiction <0)
+	{
+		 PREV=Math.abs(previousTransiction);
+	}
+	else
+	{
+		int PREV=0;
+	}
+}
+else if(e.target==E) {balance=0;
+previousTransiction=0;
+repaint();
+}
+
+repaint();
+return true;
+}
+
+public void paint (Graphics g)
+{ g.drawString("CURRENT BALANCE :"+BAL, 50, 100);
+  g.drawString("PREVIOUS BALANCE :" +PREV, 50, 140);
+}}
+
